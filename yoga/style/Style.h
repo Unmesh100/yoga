@@ -29,6 +29,7 @@
 #include <yoga/enums/Unit.h>
 #include <yoga/enums/Wrap.h>
 #include <yoga/numeric/FloatOptional.h>
+#include <yoga/style/ClipPath.h>
 #include <yoga/style/GridLine.h>
 #include <yoga/style/GridTrack.h>
 #include <yoga/style/StyleLength.h>
@@ -128,6 +129,13 @@ class YG_EXPORT Style {
   }
   void setDisplay(Display value) {
     display_ = value;
+  }
+
+  const ClipPath& clipPath() const {
+    return clipPath_;
+  }
+  void setClipPath(ClipPath value) {
+    clipPath_ = std::move(value);
   }
 
   FloatOptional flex() const {
@@ -652,6 +660,7 @@ class YG_EXPORT Style {
         alignItems_ == other.alignItems_ && alignSelf_ == other.alignSelf_ &&
         positionType_ == other.positionType_ && flexWrap_ == other.flexWrap_ &&
         overflow_ == other.overflow_ && display_ == other.display_ &&
+        clipPath_ == other.clipPath_ &&
         numbersEqual(flex_, pool_, other.flex_, other.pool_) &&
         numbersEqual(flexGrow_, pool_, other.flexGrow_, other.pool_) &&
         numbersEqual(flexShrink_, pool_, other.flexShrink_, other.pool_) &&
@@ -939,6 +948,7 @@ class YG_EXPORT Style {
   GridLine gridRowStart_{};
   GridLine gridRowEnd_{};
 
+  ClipPath clipPath_{};
   StyleValuePool pool_;
 };
 
